@@ -1,34 +1,17 @@
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
+import '../../provider/counter_provider.dart';
 
-class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      if (_counter < 10) {
-        _counter++;
-      }
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      if (_counter > 0) {
-        _counter--;
-      }
-    });
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final counterProvider = Provider.of<CounterProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contador App'),
+        title: const Text('Aplicación de Contador'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,7 +25,7 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 20),
               ),
               Text(
-                '$_counter',
+                '${counterProvider.counter}',
                 style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
               ),
             ],
@@ -51,12 +34,12 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                onPressed: _decrementCounter,
+                onPressed: counterProvider.decrementar,
                 child: const Icon(Icons.remove),
               ),
               const SizedBox(width: 20),
               ElevatedButton(
-                onPressed: _incrementCounter,
+                onPressed: counterProvider.incrementar,
                 child: const Icon(Icons.add),
               ),
             ],
@@ -66,7 +49,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: EdgeInsets.all(20.0),
               child: Text(
-                'Yeison Calderon - Sonyei888',
+                'Yeison Calderón - Sonyei888',
                 textAlign: TextAlign.right,
               ),
             ),
